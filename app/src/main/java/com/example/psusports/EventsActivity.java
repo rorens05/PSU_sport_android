@@ -169,7 +169,6 @@ public class EventsActivity extends AppCompatActivity {
         dividerItemDecoration.setDrawable(getApplicationContext().getResources().getDrawable(R.drawable.mdivider));
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setLayoutManager(linearLayoutManager);
-
     }
 
 }

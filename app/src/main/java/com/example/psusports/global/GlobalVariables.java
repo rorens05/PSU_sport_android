@@ -2,6 +2,7 @@ package com.example.psusports.global;
 
 import com.example.psusports.models.Sport;
 import com.example.psusports.models.SportEvent;
+import com.example.psusports.models.Team;
 import com.example.psusports.models.User;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class GlobalVariables {
     public static final String LOGIN_URL = SERVER_URL + "access/attempt_login";
     public static final String EVENT_URL = SERVER_URL + "editor/events";
     public static final String SPORT_URL = SERVER_URL + "editor/sports";
+    public static final String TEAM_URL = SERVER_URL + "editor/teams";
 
     public static User currentUser = new User();
 
@@ -20,5 +22,8 @@ public class GlobalVariables {
 
     public static List<Sport> sportList = new ArrayList<>();
     public static Sport selectedSport = new Sport();
+
+    public static List<Team> teamList = new ArrayList<>();
+    public static Team selectedTeam = new Team();
 
 }

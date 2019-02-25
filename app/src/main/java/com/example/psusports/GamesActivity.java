@@ -1,7 +1,10 @@
 package com.example.psusports;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,8 +25,21 @@ public class GamesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_games);
         init();
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void init(){
@@ -41,6 +57,11 @@ public class GamesActivity extends AppCompatActivity {
         organizer.setText("Organizer: " + GlobalVariables.selectedEvent.organizer);
         sport.setText(GlobalVariables.selectedSport.name);
 
-
+        viewTeams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GamesActivity.this, TeamsActivity.class));
+            }
+        });
     }
 }

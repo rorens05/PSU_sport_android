@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -108,5 +109,15 @@ public class SportsActivity extends AppCompatActivity {
         recyclerView.setAdapter(sportAdapter);
         Log.d(TAG, "Data Displayed Successfully");
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

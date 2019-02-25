@@ -1,8 +1,10 @@
 package com.example.psusports.templates;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.psusports.R;
+import com.example.psusports.SportsActivity;
+import com.example.psusports.global.GlobalVariables;
 import com.example.psusports.models.SportEvent;
 
 import java.util.List;
@@ -18,6 +22,7 @@ import java.util.List;
 public class SportEventAdapter extends
         RecyclerView.Adapter<SportEventAdapter.MyViewHolder>{
 
+    private static final String TAG = "SportEventAdapter";
     private List<SportEvent> eventList;
     private Context context;
 
@@ -62,7 +67,11 @@ public class SportEventAdapter extends
         myViewHolder.listContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(context, eventList.get(i).name + " was touched", Toast.LENGTH_SHORT).show();
+                GlobalVariables.selectedEvent = eventList.get(i);
+                Log.d(TAG, "Selected Event: " + GlobalVariables.selectedEvent.name);
+                context.startActivity(new Intent(context, SportsActivity.class));
             }
         });
     }

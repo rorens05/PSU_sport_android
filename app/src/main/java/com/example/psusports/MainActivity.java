@@ -1,5 +1,6 @@
 package com.example.psusports;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     Button login;
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(){
+        pd = new ProgressDialog(MainActivity.this);
+        pd.setMessage("Logging in");
+        pd.show();
+
         Log.d(TAG, "inside login");
         StringRequest login = new StringRequest(Request.Method.POST, GlobalVariables.LOGIN_URL, new Response.Listener<String>() {
             @Override
@@ -78,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                         GlobalVariables.currentUser = user;
                         Log.d(TAG, GlobalVariables.currentUser.toString());
                         Log.d(TAG, "serialize success");
+                        pd.dismiss();
                         startActivity(new Intent(MainActivity.this, EventsActivity.class));
                         finish();
                     }
@@ -86,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "response received error: " + e.getMessage());
                     e.printStackTrace();
                 }
+                pd.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -93,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "received error");
                 Log.d(TAG, error.toString());
                 Toast.makeText(MainActivity.this, "Unable to connect to the Server", Toast.LENGTH_SHORT).show();
+                pd.dismiss();
             }
         }){
             @Override

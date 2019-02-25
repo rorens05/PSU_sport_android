@@ -3,6 +3,7 @@ package com.example.psusports;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
@@ -16,12 +17,14 @@ import com.example.psusports.engine.MySingleton;
 import com.example.psusports.global.GlobalVariables;
 import com.example.psusports.models.Sport;
 import com.example.psusports.models.SportEvent;
+import com.example.psusports.templates.SportAdapter;
 import com.example.psusports.templates.SportEventAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +36,7 @@ public class SportsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_sports);
         init();
         loadSports();
@@ -53,6 +57,7 @@ public class SportsActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d(TAG, "Response Recieved");
                 try {
+                    GlobalVariables.sportList = new ArrayList<>();
                     JSONObject jResponse = new JSONObject(response);
                     Log.d(TAG, "message: " + jResponse.getString("message"));
                     Log.d(TAG, "event: " + GlobalVariables.selectedEvent.name);
@@ -69,6 +74,7 @@ public class SportsActivity extends AppCompatActivity {
                         Log.d(TAG, sport.name);
                     }
                     Log.d(TAG, "Sports Loaded Successfully");
+                    displayRecyclerView();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d(TAG, "Response error, Loading failed");
@@ -88,7 +94,19 @@ public class SportsActivity extends AppCompatActivity {
         MySingleton.getInstance(this).addToRequestQueue(events);
 
         Log.d(TAG, "sports loaded");
-
     }
 
+    public void displayRecyclerView() {
+        Log.d(TAG, "Displaying data");
+        Log.d(TAG, "Creating Adapter");
+        SportAdapter sportAdapter = new SportAdapter(GlobalVariables.sportList, this);
+        Log.d(TAG, "Adapter Created");
+
+        Log.d(TAG, "Creating layout");
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        Log.d(TAG, "setting adapter");
+        recyclerView.setAdapter(sportAdapter);
+        Log.d(TAG, "Data Displayed Successfully");
+
+    }
 }

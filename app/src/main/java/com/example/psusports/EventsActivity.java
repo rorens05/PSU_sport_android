@@ -115,6 +115,7 @@ public class EventsActivity extends AppCompatActivity {
                     JSONObject jResponse = new JSONObject(response);
                     JSONArray data = jResponse.getJSONArray("data");
                     Log.d(TAG, "Looping through data, size: " + data.length());
+                    GlobalVariables.eventList = new ArrayList<>();
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject temp = data.getJSONObject(i);
                         SportEvent event = new SportEvent();
@@ -150,7 +151,6 @@ public class EventsActivity extends AppCompatActivity {
         };
 
         MySingleton.getInstance(this).addToRequestQueue(events);
-
         Log.d(TAG, "eventsloaded");
 
     }
@@ -166,6 +166,7 @@ public class EventsActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 linearLayoutManager.getOrientation());
+        dividerItemDecoration.setDrawable(getApplicationContext().getResources().getDrawable(R.drawable.mdivider));
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setLayoutManager(linearLayoutManager);
 

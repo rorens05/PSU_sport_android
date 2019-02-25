@@ -48,6 +48,8 @@ public class MySingleton {
             // getApplicationContext() is key, it keeps you from leaking the
             // Activity or BroadcastReceiver if someone passes one in.
             requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
+        }else{
+            requestQueue.getCache().clear();
         }
         return requestQueue;
     }

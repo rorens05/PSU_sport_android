@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="UMeet"
+        android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -26,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Date: January 15, 2018"
+        android:textColor="@color/secondaryColor"
         android:textSize="18sp" />
 
     <TextView
@@ -34,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Venue: PSU Lingayen"
+        android:textColor="@color/secondaryColor"
         android:textSize="18sp" />
 
     <TextView
@@ -42,5 +45,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Organizer: PSU Lingayen"
+        android:textColor="@color/secondaryColor"
         android:textSize="18sp" />
 </LinearLayout>

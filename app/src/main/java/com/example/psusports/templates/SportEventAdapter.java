@@ -61,9 +61,9 @@ public class SportEventAdapter extends
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         SportEvent event = eventList.get(i);
         myViewHolder.eventName.setText(event.name);
-        myViewHolder.date.setText(event.event_date);
-        myViewHolder.venue.setText(event.venue);
-        myViewHolder.organizer.setText(event.organizer);
+        myViewHolder.date.setText("Date: " + event.event_date);
+        myViewHolder.venue.setText("Venue: " + event.venue);
+        myViewHolder.organizer.setText("Organizer: " + event.organizer);
         myViewHolder.listContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

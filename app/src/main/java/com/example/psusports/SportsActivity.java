@@ -39,6 +39,7 @@ public class SportsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_sports);
+        GlobalVariables.loadAllTeams(this);
         init();
         loadSports();
     }

@@ -88,6 +88,7 @@ public class TeamsActivity extends AppCompatActivity {
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject temp = data.getJSONObject(i);
                         Team team = new Team();
+                        team.id = temp.getString("id");
                         team.name = temp.getString("name");
                         team.sport_id = temp.getString("sport_id");
                         team.event_id = temp.getString("event_id");

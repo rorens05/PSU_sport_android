@@ -1,5 +1,6 @@
 package com.example.psusports.templates;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -120,14 +121,14 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.MyViewHolder
 
                 }
 
-                GlobalVariables.selectedGameIndex = 1;
+                GlobalVariables.selectedGameIndex = i;
                 Intent intent = new Intent(context, GameDetailsActivity.class);
                 intent.putExtra("image1", image1);
                 intent.putExtra("image2", image2);
                 intent.putExtra("name1", name1);
                 intent.putExtra("name2", name2);
                 GlobalVariables.selectedGame = gameList.get(i);
-                context.startActivity(intent);
+                ((Activity) context).startActivityForResult(intent, 2);
             }
         });
     }

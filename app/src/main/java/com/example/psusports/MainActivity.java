@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         pd = new ProgressDialog(MainActivity.this);
         pd.setMessage("Logging in");
         pd.show();
-
         Log.d(TAG, "inside login");
         Log.d(TAG, GlobalVariables.SERVER_URL);
         Log.d(TAG, GlobalVariables.LOGIN_URL);

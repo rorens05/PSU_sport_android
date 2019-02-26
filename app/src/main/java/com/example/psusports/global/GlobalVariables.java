@@ -38,6 +38,7 @@ public class GlobalVariables {
     public static String TEAM_URL = SERVER_URL + "editor/teams";
     public static String GAME_URL = SERVER_URL + "editor/games";
     public static String UPDATE_URL = SERVER_URL + "editor/edit_game";
+    public static String NEW_URL = SERVER_URL + "editor/new_game";
 
     public static User currentUser = new User();
 
@@ -114,5 +115,6 @@ public class GlobalVariables {
         TEAM_URL = SERVER_URL + "editor/teams";
         GAME_URL = SERVER_URL + "editor/games";
         UPDATE_URL = SERVER_URL + "editor/edit_game";
+        NEW_URL = SERVER_URL + "editor/new_game";
     }
 }

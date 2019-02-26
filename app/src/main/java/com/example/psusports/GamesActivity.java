@@ -31,7 +31,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class GamesActivity extends AppCompatActivity {
     private static final String TAG = "GamesActivity";
@@ -120,7 +123,18 @@ public class GamesActivity extends AppCompatActivity {
                         game.name = temp.getString("name");
                         game.game_type = temp.getString("game_type");
                         game.sport_id = temp.getString("sport_id");
-                        game.schedule = temp.getString("schedule");
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
+                        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                        try{
+                            Date convertedDate = sdf.parse(temp.getString("schedule"));
+                            game.schedule = new SimpleDateFormat("MMMM d yyyy, h:mm aaa").format(convertedDate);
+                        }catch(Exception e){
+                            game.schedule = temp.getString("schedule");
+                            Log.d(TAG, e.getMessage());
+                        }
+
                         game.event_id = temp.getString("event_id");
                         game.status = temp.getString("status");
 

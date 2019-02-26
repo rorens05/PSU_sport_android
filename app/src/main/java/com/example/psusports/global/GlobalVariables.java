@@ -64,34 +64,34 @@ public class GlobalVariables {
         StringRequest teams = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Response Recieved");
-                try {
-                    JSONObject jResponse = new JSONObject(response);
-                    JSONArray data = jResponse.getJSONArray("data");
-                    Log.d(TAG, "Looping through data, size: " + data.length());
-                    GlobalVariables.teamList = new ArrayList<>();
-                    for (int i = 0; i < data.length(); i++) {
-                        JSONObject temp = data.getJSONObject(i);
-                        Team team = new Team();
-                        team.id = temp.getString("id");
-                        team.name = temp.getString("name");
-                        team.sport_id = temp.getString("sport_id");
-                        team.event_id = temp.getString("event_id");
-                        try{
-                            team.logo = temp.getString("logo");
-                        }catch(Exception ex){
-                            team.logo = "NA";
-                        }
-                        GlobalVariables.teamList.add(team);
-                        Log.d(TAG, team.name);
+            Log.d(TAG, "Response Recieved");
+            try {
+                JSONObject jResponse = new JSONObject(response);
+                JSONArray data = jResponse.getJSONArray("data");
+                Log.d(TAG, "Looping through data, size: " + data.length());
+                GlobalVariables.teamList = new ArrayList<>();
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject temp = data.getJSONObject(i);
+                    Team team = new Team();
+                    team.id = temp.getString("id");
+                    team.name = temp.getString("name");
+                    team.sport_id = temp.getString("sport_id");
+                    team.event_id = temp.getString("event_id");
+                    try{
+                        team.logo = temp.getString("logo");
+                    }catch(Exception ex){
+                        team.logo = "NA";
                     }
-                    Log.d(TAG, "Team Loaded Successfully");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.d(TAG, "Response error, Loading failed");
+                    GlobalVariables.teamList.add(team);
+                    Log.d(TAG, team.name);
                 }
+                Log.d(TAG, "Team Loaded Successfully");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.d(TAG, "Response error, Loading failed");
+            }
 
-                pd.dismiss();
+            pd.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override

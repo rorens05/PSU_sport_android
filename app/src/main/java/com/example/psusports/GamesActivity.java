@@ -88,6 +88,13 @@ public class GamesActivity extends AppCompatActivity {
                 startActivity(new Intent(GamesActivity.this, TeamsActivity.class));
             }
         });
+
+        addGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(GamesActivity.this, AddGameActivity.class), 2);
+            }
+        });
     }
 
     public void loadGames(){

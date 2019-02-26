@@ -25,13 +25,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GlobalVariables {
+
+    private static boolean development = true;
     private static final String TAG = "GlobalVariables";
-    public static final String SERVER_URL = "http://192.168.43.194:3000/api/v1/";
-    public static final String LOGIN_URL = SERVER_URL + "access/attempt_login";
-    public static final String EVENT_URL = SERVER_URL + "editor/events";
-    public static final String SPORT_URL = SERVER_URL + "editor/sports";
-    public static final String TEAM_URL = SERVER_URL + "editor/teams";
-    public static final String GAME_URL = SERVER_URL + "editor/games";
+    private static final String LOCAL_SERVER = "http://192.168.43.194:3000/api/v1/";
+    private static final String PRODUCTION_SERVER = "http://psu-sports-system.herokuapp.com/api/v1/";
+
+    public static String SERVER_URL;
+    public static String LOGIN_URL = SERVER_URL + "access/attempt_login";
+    public static String EVENT_URL = SERVER_URL + "editor/events";
+    public static String SPORT_URL = SERVER_URL + "editor/sports";
+    public static String TEAM_URL = SERVER_URL + "editor/teams";
+    public static String GAME_URL = SERVER_URL + "editor/games";
 
     public static User currentUser = new User();
 
@@ -46,6 +51,7 @@ public class GlobalVariables {
 
     public static List<Game> gameList = new ArrayList<>();
     public static Game selectedGame = new Game();
+    public static int selectedGameIndex = 0;
 
     public static ProgressDialog pd;
     public static void loadAllTeams(final Context context){
@@ -93,5 +99,18 @@ public class GlobalVariables {
             }
         });
         MySingleton.getInstance(context).addToRequestQueue(teams);
+    }
+
+    public static void setServer(){
+        if(development){
+            SERVER_URL = LOCAL_SERVER;
+        }else{
+            SERVER_URL = PRODUCTION_SERVER;
+        }
+        LOGIN_URL = SERVER_URL + "access/attempt_login";
+        EVENT_URL = SERVER_URL + "editor/events";
+        SPORT_URL = SERVER_URL + "editor/sports";
+        TEAM_URL = SERVER_URL + "editor/teams";
+        GAME_URL = SERVER_URL + "editor/games";
     }
 }

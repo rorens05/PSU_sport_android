@@ -11,17 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".GameDetailsActivity"></activity>
         <activity
             android:name=".GamesActivity"
-            android:label="Games">
-        </activity>
-
+            android:label="Games"></activity>
         <activity android:name=".TeamsActivity" />
         <activity
             android:name=".SportsActivity"
-            android:label="Sports">
-        </activity>
+            android:label="Sports"></activity>
         <activity
             android:name=".EventsActivity"
             android:label="Events" />

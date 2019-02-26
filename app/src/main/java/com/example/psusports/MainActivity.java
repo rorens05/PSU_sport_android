@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
         getSupportActionBar().hide(); //hide the title bar
         setContentView(R.layout.activity_main);
+        GlobalVariables.setServer();
         init();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         pd.show();
 
         Log.d(TAG, "inside login");
+        Log.d(TAG, GlobalVariables.SERVER_URL);
+        Log.d(TAG, GlobalVariables.LOGIN_URL);
         StringRequest login = new StringRequest(Request.Method.POST, GlobalVariables.LOGIN_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

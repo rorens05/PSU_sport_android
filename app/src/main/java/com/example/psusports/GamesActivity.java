@@ -115,7 +115,7 @@ public class GamesActivity extends AppCompatActivity {
                         game.sport_id = temp.getString("sport_id");
                         game.schedule = temp.getString("schedule");
                         game.event_id = temp.getString("event_id");
-                        game.status = temp.getString("event_id");
+                        game.status = temp.getString("status");
 
                         JSONArray contestant = temp.getJSONArray("contestant");
 

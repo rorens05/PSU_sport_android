@@ -1,6 +1,7 @@
 package com.example.psusports.templates;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.psusports.GameDetailsActivity;
 import com.example.psusports.R;
 import com.example.psusports.global.GlobalVariables;
 import com.example.psusports.models.Game;
@@ -24,6 +26,11 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.MyViewHolder
     private static final String TAG = "GamesAdapter";
     private List<Game> gameList;
     private Context context;
+
+    String name1;
+    String name2;
+    String image1;
+    String image2;
 
     public GamesAdapter(List<Game> gameList, Context context) {
         this.gameList = gameList;
@@ -38,9 +45,10 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
 
-        Game game = gameList.get(i);
+
+        final Game game = gameList.get(i);
 
         myViewHolder.score1.setText(game.score1);
         myViewHolder.score2.setText(game.score2);
@@ -54,7 +62,8 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.MyViewHolder
             // Log.d(TAG, "logo:  " + GlobalVariables.teamList.get(i).logo);
             if(game.team1.equalsIgnoreCase(GlobalVariables.teamList.get(j).id)){
                 Log.d(TAG, "ids:  " + GlobalVariables.teamList.get(i).id);
-
+                name1 = GlobalVariables.teamList.get(j).name;
+                image1 = GlobalVariables.teamList.get(j).logo;
                 myViewHolder.team1.setText(GlobalVariables.teamList.get(j).name);
                 Picasso.get()
                         .load(GlobalVariables.teamList.get(j).logo)
@@ -65,7 +74,8 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.MyViewHolder
 
             if(game.team2.equalsIgnoreCase(GlobalVariables.teamList.get(j).id)){
                 Log.d(TAG, "ids:  " + GlobalVariables.teamList.get(i).id);
-
+                name2 = GlobalVariables.teamList.get(j).name;
+                image2 = GlobalVariables.teamList.get(j).logo;
                 myViewHolder.team2.setText(GlobalVariables.teamList.get(j).name);
                 Picasso.get()
                         .load(GlobalVariables.teamList.get(j).logo)
@@ -75,6 +85,51 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.MyViewHolder
             }
 
         }
+        myViewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d(TAG, "size of teams: " + GlobalVariables.teamList.size());
+                for(int j = 0; j < GlobalVariables.teamList.size(); j++){
+
+                    // Log.d(TAG, "ids:  " + GlobalVariables.teamList.get(i).id);
+                    // Log.d(TAG, "logo:  " + GlobalVariables.teamList.get(i).logo);
+                    if(game.team1.equalsIgnoreCase(GlobalVariables.teamList.get(j).id)){
+                        Log.d(TAG, "ids:  " + GlobalVariables.teamList.get(i).id);
+                        name1 = GlobalVariables.teamList.get(j).name;
+                        image1 = GlobalVariables.teamList.get(j).logo;
+                        myViewHolder.team1.setText(GlobalVariables.teamList.get(j).name);
+                        Picasso.get()
+                                .load(GlobalVariables.teamList.get(j).logo)
+                                .resize(100, 100)
+                                .centerCrop()
+                                .into(myViewHolder.image1);
+                    }
+
+                    if(game.team2.equalsIgnoreCase(GlobalVariables.teamList.get(j).id)){
+                        Log.d(TAG, "ids:  " + GlobalVariables.teamList.get(i).id);
+                        name2 = GlobalVariables.teamList.get(j).name;
+                        image2 = GlobalVariables.teamList.get(j).logo;
+                        myViewHolder.team2.setText(GlobalVariables.teamList.get(j).name);
+                        Picasso.get()
+                                .load(GlobalVariables.teamList.get(j).logo)
+                                .resize(100, 100)
+                                .centerCrop()
+                                .into(myViewHolder.image2);
+                    }
+
+                }
+
+                GlobalVariables.selectedGameIndex = 1;
+                Intent intent = new Intent(context, GameDetailsActivity.class);
+                intent.putExtra("image1", image1);
+                intent.putExtra("image2", image2);
+                intent.putExtra("name1", name1);
+                intent.putExtra("name2", name2);
+                GlobalVariables.selectedGame = gameList.get(i);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -86,7 +141,6 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.MyViewHolder
         ImageView image1;
         TextView score1;
         TextView team1;
-
         ImageView image2;
         TextView score2;
         TextView team2;

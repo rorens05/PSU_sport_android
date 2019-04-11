@@ -26,7 +26,7 @@ import java.util.List;
 
 public class GlobalVariables {
 
-    private static boolean development = true;
+    private static boolean development = false;
     private static final String TAG = "GlobalVariables";
     private static final String LOCAL_SERVER = "http://192.168.43.194:3000/api/v1/";
     private static final String PRODUCTION_SERVER = "http://psu-sports-system.herokuapp.com/api/v1/";

@@ -53,7 +53,8 @@ public class SportEventAdapter extends
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.event_list, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.event_list, viewGroup,
+                false);
         return new MyViewHolder(view);
     }
 

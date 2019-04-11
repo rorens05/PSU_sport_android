@@ -248,6 +248,7 @@ public class AddGameActivity extends AppCompatActivity {
                         try {
                             JSONObject jResponse = new JSONObject(response);
                             Toast.makeText(AddGameActivity.this, jResponse.getString("message"), Toast.LENGTH_SHORT).show();
+                            finish();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
